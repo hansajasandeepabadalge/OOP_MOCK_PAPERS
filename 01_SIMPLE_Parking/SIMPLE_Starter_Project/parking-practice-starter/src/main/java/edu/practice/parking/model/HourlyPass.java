@@ -18,7 +18,7 @@ public class HourlyPass extends ParkingPass {
             throw new IllegalArgumentException("Stay minutes must be strictly positive.");
         }
 
-        int  billableHours = (stayMinutes + 59) / 60;
-        return Math.multiplyExact(billableHours, rateCents);
+        long billableHours = (stayMinutes + 59L) / 60L;
+        return Math.toIntExact(Math.multiplyExact(billableHours, rateCents));
     }
 }
