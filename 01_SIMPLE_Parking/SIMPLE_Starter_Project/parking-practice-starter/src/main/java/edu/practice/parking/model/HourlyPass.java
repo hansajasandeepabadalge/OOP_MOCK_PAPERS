@@ -14,6 +14,11 @@ public class HourlyPass extends ParkingPass {
 
     public int priceCents(int stayMinutes) {
         // TODO Task 1: round up partial hours; one-hour minimum, validate input.
-        throw new UnsupportedOperationException("Task 1");
+        if (stayMinutes <= 0 ) {
+            throw new IllegalArgumentException("Stay minutes must be strictly positive.");
+        }
+
+        int  billableHours = (stayMinutes + 59) / 60;
+        return Math.multiplyExact(billableHours, rateCents);
     }
 }
