@@ -26,13 +26,28 @@ public class ParkingService {
     }
 
     public List<Quote> allQuotes(int minutes) {
-        // TODO Task 2: apply priceCents polymorphically; sort by price asc, then ID asc.
-        throw new UnsupportedOperationException("Task 2");
+        if (minutes <= 0) {
+            throw new IllegalArgumentException("Stay minutes must be Positive.");
+        }
+
+        List<Quote> quates = new ArrayList<>();
+
+        for (ParkingPass pass: repo.all()) {
+            quates.add(toQuote(pass, minutes));
+        }
+
+        quates.sort(Comparator.comparingInt(Quote::priceCents).thenComparingLong(Quote::id));
+
+        return quates;
     }
 
     public ParkingPass addHourly(NewHourlyPass body) {
         // TODO Task 3: validate id, registration, rate and duplicate ID before saving.
         throw new UnsupportedOperationException("Task 3");
+    }
+
+    private static Quote toQuote(ParkingPass pass, int minutes) {
+        return new Quote(pass.getId(), pass.getRegistration(), pass.getClass().getSimpleName(), minutes, pass.priceCents(minutes));
     }
     // You may add a private helper method for constructing Quote objects.
 }

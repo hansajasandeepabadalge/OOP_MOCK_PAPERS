@@ -12,7 +12,7 @@ public class PassRepository {
 
     public PassRepository() {
         passes.put(1L, new HourlyPass(1, "CAR-101", 250));
-        // TODO after Task 2: add new WeekendPass(2,"VAN-202",800).
+        passes.put(2L, new WeekendPass(2, "VAN-202", 800));
     }
 
     public Collection<ParkingPass> all() {
